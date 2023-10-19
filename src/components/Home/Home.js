@@ -12,9 +12,9 @@ export default function Home() {
     let history = useHistory();
 
     const theme = useTheme();
-    // const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+    
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
-    // const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
+    
 
     useEffect(() => {
         window.scroll(0,0);

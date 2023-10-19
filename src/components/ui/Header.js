@@ -135,7 +135,7 @@ const useStyles = makeStyles(theme=>({
       },
     appBar:{
         zIndex:theme.zIndex.modal + 1,
-        backgroundColor:'#FFB319',
+        backgroundColor: 'white',
         borderBottom:'#F037A5'
     },
     searchIcon: {
@@ -184,7 +184,10 @@ export default function Header(props){
     const classes = useStyles();
     const theme = useTheme();
     const history = useHistory('');
-    const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+    // const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const userAgent = navigator.userAgent;
+    const iOS = /iPad|iPhone|iPod/.test(userAgent);
+
     const matches = useMediaQuery(theme.breakpoints.down('md'));
 
     const [search, setSearch] = useState("");
@@ -213,7 +216,7 @@ export default function Header(props){
         {name:'Men',link:'/men',activeIndex:0},
         {name:'Women',link:'/women',activeIndex:1,}, 
         {name:'Mobile Cover',link:'/cover',activeIndex:2},
-        {name:'HOME',link:'/',activeIndex:9},
+        {name:'HOME',link:'/',activeIndex:3},
     ];
 
     const routesV = [
@@ -249,7 +252,7 @@ export default function Header(props){
                 className={classes.tabContainer} 
                 value={props.value} 
                 onChange={handleChange} 
-                indicatorColor='#FFB319'
+                indicatorColor='primary'
             >
                 {routes.map((route,index)=>(
                         <Tab
@@ -426,9 +429,9 @@ export default function Header(props){
                         onClick={()=>{
                             auth.signOut()                  
                             setOpenDrawer(false); 
-                            props.setValue(9)
+                            props.setValue(3)
                         }}
-                        selected={props.value === 9}
+                        selected={props.value === 3}
                     >
                         <ListItemText 
                             className={classes.drawerItem}  
@@ -462,11 +465,11 @@ export default function Header(props){
                         className={classes.logoContainer} 
                         component={Link} 
                         to='/'
-                        onClick={()=>props.setValue(9)}
+                        onClick={()=>props.setValue(3)}
                         disableRipple
                     >
                    <img alt='company logo' 
-                        src='https://images.bewakoof.com/web/bewakoof-primary-logo-white-bg-2x-1635745564.png' 
+                                src='https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg' 
                         className={classes.logo}
                     />
                     </Button>

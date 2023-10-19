@@ -100,43 +100,9 @@ export default function Shipping() {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography>Delviry info</Typography>
+              <Typography>Delivery info</Typography>
             </Grid>
-            {/* <Grid item container style={{marginTop:'2em'}}>
-                        <Grid item>
-                        <PhoneIcon style={{marginRight:'0.5em',color:'black'}}/>
-                        </Grid>
-                        <Grid item>
-                            <Typography
-                                variant='body1'
-                                style={{color:theme.palette.common.blue,fontSize:'1rem'}}    
-                            >
-                            <a href ='tel:55555555555' 
-                                style={{textDecoration:'none',color:'inherit'}}
-                            >
-                                (555) 555-5555
-                            </a>
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid item container style={{marginBottom:'2em'}}>
-                        <Grid item>
-                        <MailIcon  style={{marginRight:'0.5em',verticalAlign:'bottom'}}/>
-                        </Grid>
-                        <Grid item>
-                            <Typography
-                                variant='body1'
-                                style={{color:theme.palette.common.blue ,fontSize:'1rem'}}    
-                            >
-                           
-                            <a href ='mailto:ritikjain2727@gmail.com' 
-                                style={{textDecoration:'none',color:'inherit'}}
-                            >
-                                zachary@gmail.com
-                            </a>
-                            </Typography>
-                        </Grid>
-                    </Grid> */}
+            
             <Grid item container direction="column" style={{ width: "20em" }}>
               <Grid item style={{ marginBottom: "0.5em" }}>
                 <TextField

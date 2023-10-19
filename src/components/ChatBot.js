@@ -4,14 +4,7 @@ import ChatBot from "react-simple-chatbot";
 
 function Chat() {
   const theme = {
-    //   background: '#f5f8fb',
-    //   headerBgColor: 'orange',
-    //   headerFontColor: '#fff',
-    //   headerFontSize: '15px',
-    //   botBubbleColor: 'purple',
-    //   botFontColor: '#fff',
-    //   userBubbleColor: '#fff',
-    //   userFontColor: '#4a4a4a',
+    
     background: "#f5f8fb",
     headerBgColor: "orange",
     headerFontColor: "#fff",

@@ -14,7 +14,7 @@ import AddWhistlist from "./productComponents/AddWhistlist";
 import { StateProvider } from "../context/StateContext";
 import MobileCover from "./productComponents/MobileCover";
 import Checkout from "./productComponents/Checkout";
-import ForgotPassword from "./ForgetPassward";
+import ForgotPassword from "./ForgetPassword";
 import Search from "./ui/Search";
 import MyAccount from "./productComponents/MyAccount";
 import Chat from "./ChatBot";
