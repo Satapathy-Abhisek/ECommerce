@@ -20,48 +20,7 @@ import {
 } from "@material-ui/icons";
 
 export default function Footer() {
-    const DevInfo = styled.div`
-  background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
-  padding: 1rem;
-  div {
-    max-width: 1280px;
-    margin: 0px auto;
-    width: 90%;
-    text-align: center;
-  }
-  h5 {
-    color: #1b1b1b;
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
-  }
-  .neon {
-    color: #fb4264;
-    font-size: 16px;
-    text-shadow: 0 0 3px #f40a35;
-    animation: neon 1s ease infinite;
-    -moz-animation: neon 1s ease infinite;
-    -webkit-animation: neon 1s ease infinite;
-    @keyframes neon {
-      0%,
-      100% {
-        text-shadow: 0 0 2px #fa1c16, 0 0 3px #fa1c16, 0 0 10px #fa1c16,
-          0 0 10px #fa1c16, 0 0 1px #fed128, 1px 1.2px 1px #806914;
-        color: #fed128;
-      }
-      50% {
-        text-shadow: 0 0 3px #800e0b, 0 0 1.5px #800e0b, 0 0 5px #800e0b,
-          0 0 5px #800e0b, 0 0 0.2px #800e0b, 0.4px 1px 1px #40340a;
-        color: #806914;
-      }
-    }
-  }
-  a {
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+
 
 // Footer Section
 const Devstyle = styled.div`
