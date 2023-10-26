@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { database } from '../../firebase'
-import { Grid,useMediaQuery,useTheme,makeStyles,Typography } from '@material-ui/core';
+import { Grid,useMediaQuery,useTheme,makeStyles,Typography,TextField } from '@material-ui/core';
 import ItemCards from '../productComponents/ItemCards'
+import { debounce } from 'lodash';
 
 const useStyles = makeStyles(theme => ({
    rowContainer: {
@@ -110,24 +111,15 @@ const useStyles = makeStyles(theme => ({
 
 // export default Search;
 
-
-
-
-
-
 const Search = (props) => {
    const theme = useTheme();
    const classes = useStyles();
    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
    const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-   const [data, setData] = useState([]);
-   const useQuery = () => {
-      return new URLSearchParams(useLocation().search)
-   }
-   let query = useQuery();
-   let search = query.get("name");
-   console.log(search);
+   const [products, setProducts] = useState([]);
+   const [search, setSearch] = useState('');
+   const [searchResults, setSearchResults] = useState([]);
 
    useEffect(() => {
       window.scroll(0, 0);
@@ -141,17 +133,35 @@ const Search = (props) => {
             }
             const products = await response.json();
 
-            const filteredProducts = products.filter(product => product.title.includes(search) || product.description.includes(search));
-
-            setData(filteredProducts);
+            setProducts(products);
          } catch (error) {
-            console.error("Error fetching data:", error);
-            setData([]);
+            console.error('Error fetching data:', error);
          }
       };
 
       fetchData();
-   }, [search]);
+   }, []);
+
+   const debouncedSearch = debounce((value) => {
+      // Filter products based on the search input
+      const filteredProducts = products.filter(product =>
+         product.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setSearchResults(filteredProducts);
+   }, 500);
+
+   const handleSearchChange = (event) => {
+      const { value } = event.target;
+      setSearch(value);
+      debouncedSearch(value);
+   };
+   const handleSearchFieldClick = () => {
+      // Programmatically focus on the TextField when clicked
+      document.getElementById('searchTextField').focus();
+   };
+
+   // Show full product list when the search input is empty
+   const showFullProductList = search.trim() === '';
 
    return (
       <Grid
@@ -162,7 +172,17 @@ const Search = (props) => {
          className={classes.rowContainer}
       >
          <Grid item>
-            <Typography variant='h4'>Search Results</Typography>
+            <Typography variant='h4'>Product List</Typography>
+         </Grid>
+         <Grid item onClick={handleSearchFieldClick}>
+            <TextField
+               label='Search Products'
+               variant='outlined'
+               value={search}
+               onChange={handleSearchChange}
+               autoFocus
+               id='searchTextField'
+            />
          </Grid>
          <Grid
             item
@@ -170,26 +190,49 @@ const Search = (props) => {
             direction='row'
             alignItems='center'
             justifyContent='center'
-            className={classes.rowContainer}
          >
-            {data && data.map((product) => (
-               <Grid item style={{ maxWidth: '40em', marginLeft: matchesXS ? 0 : matchesSM ? '1em' : matchesMD ? '2em' : '8em' }}>
-                  <ItemCards
+            {showFullProductList ? (
+               products.map((product) => (
+                  <Grid
+                     item
+                     style={{
+                        maxWidth: '40em',
+                        marginLeft: matchesXS ? 0 : matchesSM ? '1em' : matchesMD ? '2em' : '8em',
+                     }}
                      key={product.id}
-                     id={product.id}
-                     productName={product.title}
-                     
-                     image={product.image}
-                     price={product.price}
-                     user={props.user}
-                  />
-               </Grid>
-            ))}
-            {data.length !== 0 ? <></> : <h2>Eh! Keyword Error...</h2>}
+                  >
+                     <ItemCards
+                        id={product.id}
+                        productName={product.title}
+                        image={product.image}
+                        price={product.price}
+                        user={props.user}
+                     />
+                  </Grid>
+               ))
+            ) : (
+               searchResults.map((product) => (
+                  <Grid
+                     item
+                     style={{
+                        maxWidth: '40em',
+                        marginLeft: matchesXS ? 0 : matchesSM ? '1em' : matchesMD ? '2em' : '8em',
+                     }}
+                     key={product.id}
+                  >
+                     <ItemCards
+                        id={product.id}
+                        productName={product.title}
+                        image={product.image}
+                        price={product.price}
+                        user={props.user}
+                     />
+                  </Grid>
+               ))
+            )}
          </Grid>
       </Grid>
    );
-}
+};
 
 export default Search;
-
