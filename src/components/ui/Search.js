@@ -132,7 +132,6 @@ const Search = (props) => {
                throw new Error('Network response was not ok');
             }
             const products = await response.json();
-
             setProducts(products);
          } catch (error) {
             console.error('Error fetching data:', error);
